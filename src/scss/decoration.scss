@@ -1,0 +1,172 @@
+/*
+
+
+
+
+*/
+/* --------------------------------------- */
+/* colum */
+/* 
+<div class="section">
+    <div class="wrapper">
+        <div class="column"></div>
+    </div>
+</div>
+*/
+section ,.wrapper,.column{
+    box-sizing: border-box;
+}
+section {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+  .wrapper {
+    /* max-width:1200px; */
+  }
+  .column {
+    float: left;
+    padding:10px;
+  }
+
+clear,.clear{
+    clear:both;
+    display:block;
+}
+
+
+/* --------------------------------------- */
+/* size */
+/*
+<div class="column sp10 pc33"></div>
+*/
+
+@media screen and (max-width: 480px) {
+    /* sp */
+  
+    .sp10 {
+      width: 10%;
+    }
+    .sp20 {
+      width: 20%;
+    }
+    .sp30 {
+      width: 30%;
+    }
+    .sp40 {
+      width: 30%;
+    }
+    .sp40 {
+      width: 40%;
+    }
+    .sp50 {
+      width: 50%;
+    }
+    .sp60 {
+      width: 60%;
+    }
+    .sp70 {
+      width: 70%;
+    }
+    .sp80 {
+      width: 80%;
+    }
+    .sp90 {
+      width: 90%;
+    }
+    .sp100 {
+      width: 100%;
+    }
+  
+    .sp33 {
+      width: 33.33%;
+    }
+    .sp25 {
+      width: 25%;
+    }
+  }
+  @media screen and (min-width: 481px) {
+    /* pc */
+  
+    .pc10 {
+      width: 10%;
+    }
+    .pc20 {
+      width: 20%;
+    }
+    .pc30 {
+      width: 30%;
+    }
+    .pc40 {
+      width: 30%;
+    }
+    .pc40 {
+      width: 40%;
+    }
+    .pc50 {
+      width: 50%;
+    }
+    .pc60 {
+      width: 60%;
+    }
+    .pc70 {
+      width: 70%;
+    }
+    .pc80 {
+      width: 80%;
+    }
+    .pc90 {
+      width: 90%;
+    }
+    .pc100 {
+      width: 100%;
+    }
+  
+    .pc33 {
+      width: 33.33%;
+    }
+    .pc25 {
+      width: 25%;
+    }
+    .pc75 {
+      width: 75%;
+    }
+  }
+  
+
+
+  /*
+  
+  */
+
+  .pa10{
+    padding:10px;
+  }
+  .ma10{
+    margin:10px 0px;
+  }
+  /*
+  
+  */
+  .text-right{
+    text-align: right;
+  }
+  .text-left{
+    text-align: left;
+  }
+  .text-center{
+    text-align: center;
+  }
+
+
+  /*
+  
+  */
+
+  .bk-gray{
+    background-color: #eee;
+  }
+
+  .bk-black{
+    background-color: #222;
+  }

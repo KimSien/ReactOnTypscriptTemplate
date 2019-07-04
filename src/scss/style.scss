@@ -1,0 +1,45 @@
+/*
+
+style
+
+*/
+@media screen and (max-width: 480px) {
+    /* sp */
+    h1 {
+      font-size: 36px;
+      line-height: 1.5em;
+    }
+    h2 {
+      font-size: 24px;
+      line-height: 1.3em;
+    }
+    h3 {
+      font-size: 18px;
+      line-height: 1.1em;
+    }
+    p {
+      font-size: 14px;
+      line-height: 1em;
+    }
+  }
+  
+  @media screen and (min-width: 481px) {
+    /* pc */
+    h1 {
+      font-size: 36px;
+      line-height: 1.5em;
+    }
+    h2 {
+      font-size: 24px;
+      line-height: 1.3em;
+    }
+    h3 {
+      font-size: 18px;
+      line-height: 1.1em;
+    }
+    p {
+      font-size: 14px;
+      line-height: 1em;
+    }
+  }
+  

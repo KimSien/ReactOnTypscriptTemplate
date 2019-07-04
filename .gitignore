@@ -1,0 +1,19 @@
+# Develop
+node_modules/
+
+# Work and Draft
+readmework.md
+
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+
+# public resource
+
+public_html/asset/css/
+public_html/asset/js/
