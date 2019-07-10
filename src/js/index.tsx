@@ -38,6 +38,7 @@ class Canvas extends  React.Component<BaseProps, BaseStete>{
       this.setState({
         drawing: false
       });
+
     }
     
     getContext() {
@@ -48,6 +49,9 @@ class Canvas extends  React.Component<BaseProps, BaseStete>{
       this.setState({ drawing: true });
       const ctx = this.getContext();
       ctx.moveTo(x, y);
+
+      //const ctx = this.getContext();
+      ctx.fillRect(10, 10, 100, 100);
     }
   
     draw(x :any, y :any) {
