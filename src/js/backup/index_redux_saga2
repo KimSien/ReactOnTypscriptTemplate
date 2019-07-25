@@ -27,13 +27,6 @@ import { select, call, put, takeEvery, takeLatest, delay, all } from 'redux-saga
 
 /**
  * 
- * 4-1 add child component
- * 
- */
-import {ChildComponent} from "./component/child";
-
-/**
- * 
  * 3-2 setting base Mysaga func
  * 
  * @param url 
@@ -143,8 +136,7 @@ class AppComponent extends React.Component<any, Astate>{
     return (
       <div>
         {CallJsonFuncComp}
-        
-        <ChildComponent ParentButton={() => { this.props.dispatch({ type: "Test_Click", test: "test2" }) }} />
+
         <p>test state is {this.state.pr}</p>
         <p>test saga state to prop is {this.props.test}</p>
         <input type="button" onClick={() => { this.props.dispatch({ type: "Test_Click", test: "test2" }) }} defaultValue="click" />
