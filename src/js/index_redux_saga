@@ -36,13 +36,33 @@ import { select, call, put, takeEvery, takeLatest, delay, all } from 'redux-saga
 function* AjaxGetPost(url: any) {
   /**
    * ajax func
+   * 
+   * https://column.yamato-gp.net/get_json.php?limit=3
+   * 
    */
+  try {
+    yield console.log("t3");
 
-  const returnValue: any = [];
-  yield put({ type: "ajax_get_post", returnValue });
+    yield delay(1000);
+
+    const retvalue = yield call(() => {
+      try {
+        return fetch('https://column.yamato-gp.net/get_json.php?limit=3')
+          .then(res => res.json())
+      } catch (e) {
+        return { count: "0" }
+      }
+    });
+    yield put({ type: "ajax_get_post", volume:retvalue });
+
+  } catch (e) {
+    //yield put({type:'On_Click', a: 2});
+  }
+
 }
-function* TestClick(v: any){
-  yield put({type:"test",volume:v})
+
+function* TestClick(v: any) {
+  yield put({ type: "test", volume: v })
 }
 
 /**
@@ -53,7 +73,7 @@ function* TestClick(v: any){
 function* MySaga() {
   yield all([
     takeLatest("Ajax_Get_Post", AjaxGetPost),
-    takeLatest("Test_Click",TestClick)
+    takeLatest("Test_Click", TestClick)
   ]);
 }
 
@@ -71,24 +91,27 @@ function* MySaga() {
 }
 */
 
-interface Astate { 
+interface Astate {
   pr: any;
- }
+}
 
-class AppComponent extends React.Component<any,Astate>{
+class AppComponent extends React.Component<any, Astate>{
 
-  state :Astate ={
-    pr : ""
+  state: Astate = {
+    pr: ""
   }
 
-  componentWillReceiveProps(){
-    console.log(this.state);   
+  componentDidMount(){
+    this.props.dispatch({ type: "Ajax_Get_Post", url: "test2" })
+  }
+  componentWillReceiveProps() {
+    console.log(this.state);
     console.log(this.props.test);
 
     this.setState({
-      pr : this.props.test
+      pr: this.props.test
     });
-     
+
   }
 
   /**
@@ -104,9 +127,9 @@ class AppComponent extends React.Component<any,Astate>{
 
     return (
       <div>
-      <p>test state is {this.state.pr}</p>
-      <p>test saga state to prop is {this.props.test}</p>
-      <input type="button" onClick={ ()=>{ this.props.dispatch({type:"Test_Click", test:"test2"}) } } defaultValue="click" />
+        <p>test state is {this.state.pr}</p>
+        <p>test saga state to prop is {this.props.test}</p>
+        <input type="button" onClick={() => { this.props.dispatch({ type: "Test_Click", test: "test2" }) }} defaultValue="click" />
       </div>
     );
   }
@@ -122,24 +145,24 @@ const App: any = (() => {
    * 
    * @param state 
    */
-  
+
   const mapStatetoProps = (state: any) => {
-    return {...state };
-    
+    return { ...state };
+
     /*
     return [...state,{
       test: ""
     }]
     */
-    
-   /*
-   return {
-     test: ""
-   }
-   */
-    
+
+    /*
+    return {
+      test: ""
+    }
+    */
+
   }
-  
+
 
   /* redux only */
   /**
@@ -188,7 +211,7 @@ const App: any = (() => {
 
 
 const initialState = {
-  test : "start",
+  test: "start",
 }
 /**
  * 
@@ -199,16 +222,20 @@ const initialState = {
  * @param state 
  * @param action 
  */
-function reducer(state:any=[],action:any){
+function reducer(state: any = [], action: any) {
   switch (action.type) {
-    case "ajaxgetpost":
+    case "ajax_get_post":
 
       /**
        * state controle
        * 
        */
-      
+      console.log("ajax get return is ",action.volume);
+
+      return state;
       break;
+    
+    
     case "test":
       //console.log(action);
       //console.log("test");
@@ -218,9 +245,9 @@ function reducer(state:any=[],action:any){
         "test" : action.volume.test
       });
       */
-      return {...state, "test" : action.volume.test} 
+      return { ...state, "test": action.volume.test }
       break;
-      
+
     default:
       return state;
       break;
@@ -245,7 +272,7 @@ const store = createStore(reducer,applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(MySaga);
  * 
  */
-const store = createStore(reducer,applyMiddleware(sagaMiddleware));
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(MySaga);
 
 /**
@@ -268,7 +295,7 @@ sagaMiddleware.run(MySaga);
  */
 ReactDom.render(
   <Provider store={store} >
-  <App />
+    <App />
   </Provider>
   ,
   document.getElementById("app")
