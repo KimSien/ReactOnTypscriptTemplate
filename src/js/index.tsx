@@ -39,10 +39,10 @@ function* AjaxGetPost(url: any) {
    */
 
   const returnValue: any = [];
-  yield put({ type: "ajax_get_post", v: returnValue });
+  yield put({ type: "ajax_get_post", returnValue });
 }
-function* TestClick(a: any){
-  yield put({type:"test",a})
+function* TestClick(v: any){
+  yield put({type:"test",volume:v})
 }
 
 /**
@@ -70,13 +70,25 @@ function* MySaga() {
   Test_Click :any;
 }
 */
-interface Astate { 
-  test: any;
- }
-class AppComponent extends React.Component<any, Astate>{
 
-  state: Astate = {
-    test : "test",
+interface Astate { 
+  pr: any;
+ }
+
+class AppComponent extends React.Component<any,Astate>{
+
+  state :Astate ={
+    pr : ""
+  }
+
+  componentWillReceiveProps(){
+    console.log(this.state);   
+    console.log(this.props.test);
+
+    this.setState({
+      pr : this.props.test
+    });
+     
   }
 
   /**
@@ -89,10 +101,12 @@ class AppComponent extends React.Component<any, Astate>{
    * 
    */
   public render() {
+
     return (
       <div>
-      <p>test</p>
-      <input type="button" onClick={ ()=>{ this.props.dispatch({type:"Test_Click",a:"test"}) } } defaultValue="click" />
+      <p>test state is {this.state.pr}</p>
+      <p>test saga state to prop is {this.props.test}</p>
+      <input type="button" onClick={ ()=>{ this.props.dispatch({type:"Test_Click", test:"test2"}) } } defaultValue="click" />
       </div>
     );
   }
@@ -110,7 +124,20 @@ const App: any = (() => {
    */
   
   const mapStatetoProps = (state: any) => {
-    return { ...state };
+    return {...state };
+    
+    /*
+    return [...state,{
+      test: ""
+    }]
+    */
+    
+   /*
+   return {
+     test: ""
+   }
+   */
+    
   }
   
 
@@ -160,6 +187,9 @@ const App: any = (() => {
  */
 
 
+const initialState = {
+  test : "start",
+}
 /**
  * 
  * 2-2 redux
@@ -181,10 +211,16 @@ function reducer(state:any=[],action:any){
       break;
     case "test":
       //console.log(action);
-      console.log("test");
-      return state;
-  
+      //console.log("test");
+
+      /*
+      return Object.assign({}, state, {
+        "test" : action.volume.test
+      });
+      */
+      return {...state, "test" : action.volume.test} 
       break;
+      
     default:
       return state;
       break;
