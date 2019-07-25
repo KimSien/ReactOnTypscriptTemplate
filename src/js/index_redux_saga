@@ -40,25 +40,18 @@ function* AjaxGetPost(url: any) {
    * https://column.yamato-gp.net/get_json.php?limit=3
    * 
    */
-  try {
-    yield console.log("t3");
-
-    yield delay(1000);
-
-    const retvalue = yield call(() => {
+  const retvalue = yield call(() => {
       try {
         return fetch('https://column.yamato-gp.net/get_json.php?limit=3')
           .then(res => res.json())
+          .then(html=> {
+           return { count: html.length, data: html }
+          })
       } catch (e) {
         return { count: "0" }
       }
     });
     yield put({ type: "ajax_get_post", volume:retvalue });
-
-  } catch (e) {
-    //yield put({type:'On_Click', a: 2});
-  }
-
 }
 
 function* TestClick(v: any) {
